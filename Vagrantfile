@@ -95,7 +95,7 @@ Vagrant.configure(2) do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
     sudo apt-get update
     sudo apt-get install -y \
       postgresql-9.3 \
@@ -107,16 +107,22 @@ Vagrant.configure(2) do |config|
 
     sudo -u postgres psql -c "create role root with createdb login password 'foobar';"
 
-    if [ ! -f ~/.rbenv ]; then
+    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/vagrant/.profile
+    echo 'eval "$(rbenv init -)"' >> /home/vagrant/.profile
+
+
+    if [ ! -d /home/vagrant/.rbenv ]; then
       git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
       git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-      rbenv install 2.1.3
+    else
+      cd ~/.rbenv && git pull;
+      cd ~/.rbenv/plugins/ruby-build && git pull;
     fi
-    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
-    echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
-    source ~/.bash_profile
-    gem install bundler
+    cd ~
+    source ~/.profile
+    rbenv install 2.1.3
     cd /vagrant/
+    gem install bundler
     bundle install
   SHELL
 end
