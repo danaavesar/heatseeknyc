@@ -105,7 +105,7 @@ Vagrant.configure(2) do |config|
       postgresql-server-dev-9.3 \
       nodejs
 
-    sudo -u postgres psql -c "create role root with createdb login password 'foobar';"
+    sudo -u postgres psql -c "create role root with createdb login password 'password';"
 
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/vagrant/.profile
     echo 'eval "$(rbenv init -)"' >> /home/vagrant/.profile
@@ -120,7 +120,9 @@ Vagrant.configure(2) do |config|
     fi
     cd ~
     source ~/.profile
+
     rbenv install 2.1.3
+
     cd /vagrant/
     gem install bundler
     bundle install
