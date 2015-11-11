@@ -70,7 +70,7 @@ If you are on a mac:
 git clone https://github.com/heatseeknyc/heatseeknyc.git
 brew install caskroom/cask/brew-cask
 brew cask install virtualbox vagrant
-vagrant plugin install vagrant-hostmanager vagrant cachier
+vagrant plugin install vagrant-hostmanager vagrant-cachier
 cd heatseeknyc
 vagrant up
 vagrant ssh
