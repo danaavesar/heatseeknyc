@@ -51,6 +51,7 @@ group :test, :development do
   gem 'spork-rails'
   gem 'sqlite3'
   gem 'travis'
+  gem 'spring' # keeps the rails process running for faster init times
   #gem 'bullet' # detect n+1 errors
   #gem 'brakeman' # auto security testing
   #gem 'hakiri' # more automagic security
