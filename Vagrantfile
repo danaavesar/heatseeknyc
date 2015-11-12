@@ -131,7 +131,8 @@ Vagrant.configure(2) do |config|
     unicorn_rails -D
     sudo rm /etc/nginx/sites-enabled/default
     sudo ln -s /vagrant/config/nginx.conf /etc/nginx/sites-enabled
-    mkdir -p /var/run/nginx/tmp
+    sudo mkdir -p /var/run/nginx/tmp
+    sudo chown -R www-data:www-data /var/run/nginx/
     sudo service nginx restart
   SHELL
 end
