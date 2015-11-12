@@ -16,4 +16,6 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:account_update) << param
     end
   end
+
+
 end

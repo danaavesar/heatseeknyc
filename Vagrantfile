@@ -103,7 +103,8 @@ Vagrant.configure(2) do |config|
       ruby-build \
       git \
       postgresql-server-dev-9.3 \
-      nodejs
+      nodejs \
+      nginx-full
 
     sudo -u postgres psql -c "create role root with createdb login password 'password';"
 
@@ -126,5 +127,11 @@ Vagrant.configure(2) do |config|
     cd /vagrant/
     gem install bundler
     bundle install
+    spring start
+    unicorn_rails -D
+    sudo rm /etc/nginx/sites-enabled/default
+    sudo ln -s /vagrant/config/nginx.conf /etc/nginx/sites-enabled
+    mkdir -p /var/run/nginx/tmp
+    sudo service nginx restart
   SHELL
 end
