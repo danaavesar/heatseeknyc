@@ -108,9 +108,12 @@ Vagrant.configure(2) do |config|
 
     sudo -u postgres psql -c "create role root with createdb login password 'password';"
 
+    # set path and init rbenv
     echo 'export PATH="$HOME/.rbenv/bin:/vagrant/bin/:$PATH"' >> /home/vagrant/.profile
     echo 'eval "$(rbenv init -)"' >> /home/vagrant/.profile
 
+    # automatically cd to /vagrant/
+    echo 'if [ -d /vagrant/ ]; then cd /vagrant/; fi' >> /home/vagrant/.bashrc
 
     if [ ! -d /home/vagrant/.rbenv ]; then
       git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
