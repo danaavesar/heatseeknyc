@@ -107,7 +107,7 @@ Vagrant.configure(2) do |config|
 
     sudo -u postgres psql -c "create role root with createdb login password 'password';"
 
-    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/vagrant/.profile
+    echo 'export PATH="$HOME/.rbenv/bin:/vagrant/bin/:$PATH"' >> /home/vagrant/.profile
     echo 'eval "$(rbenv init -)"' >> /home/vagrant/.profile
 
 
